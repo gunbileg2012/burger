@@ -1,0 +1,24 @@
+import React from "react";
+import css from "./style.module.css";
+import Logo from "../Logo";
+import Menu from "../Menu/index";
+import Shadow from "../Gerenal/Shadow";
+const SideBar = (props) => {
+  let classes = [css.SideBar, css.Close];
+  if (props.showSideBar) {
+    classes = [css.SideBar, css.Open];
+  }
+  return (
+    <div>
+      <Shadow
+        closeConfirmModal={props.toggleSideBar}
+        show={props.showSideBar}
+      />
+      <div onClick={props.toggleSideBar} className={classes.join(" ")}>
+        <Logo />
+        <Menu />
+      </div>
+    </div>
+  );
+};
+export default SideBar;
