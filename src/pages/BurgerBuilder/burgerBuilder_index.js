@@ -31,9 +31,7 @@ export default class BurderBuilder extends Component {
       .then((response) => {
         let arr = Object.entries(response.data);
         arr = arr.reverse();
-        arr.forEach((el) => {
-          console.log(el[1]);
-        });
+        arr.forEach((el) => {});
         const lastOrder = arr[arr.length - 1];
         this.setState({
           totalPrice: lastOrder[1].totalPrice,
@@ -68,7 +66,17 @@ export default class BurderBuilder extends Component {
   };
 
   continueOrder = () => {
-    const order = {
+    this.hideConfirmModal();
+    const params = [];
+    for (let inc in this.state.ingredients) {
+      params.push(inc + "=" + this.state.ingredients[inc]);
+    }
+    const query = params.join("&");
+    this.props.history.push({
+      pathname: "/ship",
+      search: query,
+    });
+    /* const order = {
       ingredients: this.state.ingredients,
       totalPrice: this.state.totalPrice,
       address: {
@@ -83,7 +91,7 @@ export default class BurderBuilder extends Component {
         console.log("Амжилттай хадгаллаа");
       })
       .catch((error) => console.log(error))
-      .finally(() => this.setState({ loading: false }));
+      .finally(() => this.setState({ loading: false }));*/
   };
 
   render() {

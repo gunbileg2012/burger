@@ -1,7 +1,8 @@
 import React from "react";
 import BurgerIngredient from "../burgerIngredient/burgerIngredient_index";
 import styles from "./style.module.css";
-const burger = (props) => {
+import { withRouter } from "react-router-dom";
+const Burger = (props) => {
   let items = Object.entries(props.ingredients);
   let content = [];
   items.map((el, index) => {
@@ -11,7 +12,6 @@ const burger = (props) => {
   });
   if (content.length === 0)
     content = <p>Хачиртай талхныхаа орцыг сонгоно уу.....</p>;
-
   return (
     <div className={styles.burger}>
       <BurgerIngredient type="bread-top" />
@@ -20,4 +20,4 @@ const burger = (props) => {
     </div>
   );
 };
-export default burger;
+export default withRouter(Burger);

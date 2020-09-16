@@ -4,10 +4,10 @@ import css from "./style.module.css";
 const Menu = () => (
   <div>
     <ul className={css.Menu}>
-      <MenuItem active link="/">
+      <MenuItem exact url="/">
         Шинэ захиалга
       </MenuItem>
-      <MenuItem link="/checkout">Төлбөр</MenuItem>
+      <MenuItem url="/order">Захиалга</MenuItem>
     </ul>
   </div>
 );
