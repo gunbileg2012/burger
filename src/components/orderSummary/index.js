@@ -1,5 +1,8 @@
 import React from "react";
 import Button from "../../components/Gerenal/Button";
+import { connect } from "react-redux";
+import * as actions from "../../redux/action/BurgerAction";
+
 const OrderSummery = (props) => {
   return (
     <div>
@@ -13,11 +16,21 @@ const OrderSummery = (props) => {
         ))}
       </ul>
       <p>
-        <b>Захиалгын нийт дүн: {props.price} ₮</b>
+        <b>Захиалгын нийт дүн: {props.totalPrice} ₮</b>
       </p>
       <Button clicked={props.hideFunc} text="Татгалхзах" />
       <Button clicked={props.continue} text="Үргэлжлүүлэх" />
     </div>
   );
 };
-export default OrderSummery;
+const mapStateTpPorps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice,
+    names: state.names,
+  };
+};
+const mapDispathchProps = (dispatch) => {
+  return {};
+};
+export default connect(mapStateTpPorps, mapDispathchProps)(OrderSummery);

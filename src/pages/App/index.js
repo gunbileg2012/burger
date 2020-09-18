@@ -6,7 +6,7 @@ import SideBar from "../../components/SideBar";
 import OrderPage from "../OrdersPage";
 import { Route, Switch } from "react-router-dom";
 import Order from "../../components/Order";
-import { ShippingPage } from "../shippingPage";
+import ShippingPage from "../shippingPage";
 class App extends Component {
   state = {
     showSideBar: false,

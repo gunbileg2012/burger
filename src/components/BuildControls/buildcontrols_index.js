@@ -1,6 +1,8 @@
 import React from "react";
 import BuildControl from "../BuildControl/buildcontol_index";
 import styles from "./style.module.css";
+import { connect } from "react-redux";
+import * as actions from "../../redux/action/BurgerAction";
 const BuildControls = (props) => {
   return (
     <div className={styles.BuildControls}>
@@ -10,8 +12,8 @@ const BuildControls = (props) => {
           <BuildControl
             key={index}
             disabled={props.disabled}
-            minusInd={props.minusInd}
-            addInd={props.addInd}
+            minusInd={props.minIngredientsName}
+            addInd={props.addIngredientsName}
             type={e}
             mn={props.names[e]}
           />
@@ -24,4 +26,16 @@ const BuildControls = (props) => {
     </div>
   );
 };
-export default BuildControls;
+const mapStateTpPorps = (state) => {
+  return {
+    totalPrice: state.totalPrice,
+    names: state.names,
+  };
+};
+const mapDispathchProps = (dispatch) => {
+  return {
+    addIngredientsName: (name) => dispatch(actions.addIngredientsName(name)),
+    minIngredientsName: (name) => dispatch(actions.minIngredientsName(name)),
+  };
+};
+export default connect(mapStateTpPorps, mapDispathchProps)(BuildControls);
