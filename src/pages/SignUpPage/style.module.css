@@ -1,0 +1,15 @@
+.LoginForm {
+  width: 100%;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 25px;
+  text-align: center;
+}
+.LoginForm input {
+  display: block;
+  font-size: 18px;
+  padding: 5px;
+  margin: 10px auto;
+  font-size: 13px;
+}

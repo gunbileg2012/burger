@@ -15,7 +15,7 @@ const initialState = {
   },
 };
 const priceList = { salad: 150, cheese: 250, bacon: 800, meat: 1500 };
-const reducer = (state = initialState, action) => {
+const burgerReducer = (state = initialState, action) => {
   if (action.type === "addIngredients") {
     return {
       ...state,
@@ -40,4 +40,4 @@ const reducer = (state = initialState, action) => {
   }
   return state;
 };
-export default reducer;
+export default burgerReducer;

@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../../components/Gerenal/Button";
 import { connect } from "react-redux";
-import * as actions from "../../redux/action/BurgerAction";
 
 const OrderSummery = (props) => {
   return (
@@ -25,12 +24,10 @@ const OrderSummery = (props) => {
 };
 const mapStateTpPorps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    names: state.names,
+    ingredients: state.burgerReducer.ingredients,
+    totalPrice: state.burgerReducer.totalPrice,
+    names: state.burgerReducer.names,
   };
 };
-const mapDispathchProps = (dispatch) => {
-  return {};
-};
-export default connect(mapStateTpPorps, mapDispathchProps)(OrderSummery);
+
+export default connect(mapStateTpPorps)(OrderSummery);

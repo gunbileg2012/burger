@@ -4,6 +4,7 @@ import styles from "./style.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../redux/action/BurgerAction";
 const BuildControls = (props) => {
+  console.log(props);
   return (
     <div className={styles.BuildControls}>
       <p>Бургерийн үнэ: {props.totalPrice}₮</p>
@@ -28,8 +29,8 @@ const BuildControls = (props) => {
 };
 const mapStateTpPorps = (state) => {
   return {
-    totalPrice: state.totalPrice,
-    names: state.names,
+    totalPrice: state.burgerReducer.totalPrice,
+    names: state.burgerReducer.names,
   };
 };
 const mapDispathchProps = (dispatch) => {

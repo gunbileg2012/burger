@@ -3,14 +3,14 @@ import css from "./style.module.css";
 import Spinner from "../../components/spinner/index";
 import URL from "../../axios-orders";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../redux/action/orderAction";
 class ContactData extends Component {
   state = {
     name: null,
     city: null,
     street: null,
-    loading: false,
   };
-
   changeName = (e) => {
     this.setState({ name: e.target.value });
   };
@@ -20,9 +20,14 @@ class ContactData extends Component {
   changeCity = (e) => {
     this.setState({ city: e.target.value });
   };
-
+  componentDidUpdate() {
+    // alert("update");
+    if (this.props.finished && !this.props.error)
+      this.props.history.replace("/order");
+  }
   sendOrder = () => {
     const order = {
+      userId: this.props.userId,
       ingredients: this.props.ingredients,
       totalPrice: this.props.totalPrice,
       address: {
@@ -31,20 +36,19 @@ class ContactData extends Component {
         street: this.state.street,
       },
     };
-    this.setState({ loading: true });
-    URL.post("orders.json", order)
-      .then((response) => {
-        console.log("Амжилттай хадгаллаа");
-      })
-      .catch((error) => console.log(error))
-      .finally(() => this.setState({ loading: false }));
-    console.log(this.props);
+    this.props.saveOrder(order);
   };
   render() {
-    console.log(this.props);
     return (
       <div className={css.ContactData}>
-        {this.state.loading ? (
+        <div>
+          {this.props.error ? (
+            `Захиалга хадгалах үед алдаа гарлаа: ${this.props.error}`
+          ) : (
+            <div></div>
+          )}
+        </div>
+        {this.props.loading ? (
           <Spinner />
         ) : (
           <div>
@@ -74,9 +78,21 @@ class ContactData extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { totalPrice: state.totalPrice, ingredients: state.ingredients };
+  return {
+    ingredients: state.burgerReducer.ingredients,
+    totalPrice: state.burgerReducer.totalPrice,
+    loading: state.orderReducer.newOrder.loading,
+    finished: state.orderReducer.newOrder.finished,
+    error: state.orderReducer.newOrder.error,
+    userId: state.signUpReducer.userId,
+  };
 };
 const mapDispathchProps = (dispatch) => {
-  return {};
+  return {
+    saveOrder: (newOrder) => dispatch(actions.saveOrder(newOrder)),
+  };
 };
-export default connect(mapStateToProps, mapDispathchProps)(ContactData);
+export default connect(
+  mapStateToProps,
+  mapDispathchProps
+)(withRouter(ContactData));
